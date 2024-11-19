@@ -123,7 +123,7 @@ dt = 5.87652e+06s
 
 ## Running the experiment on GPU
 To run the code on a GPU make sure to have the following option turned on, for AMD/Intel GPUs turn the corresponding options to ON:
-```bash H-MECs/experiments/h-mec-rsf-ginkgo-v1/CMakeLists.txt
+``` py title="H-MECs/experiments/h-mec-rsf-ginkgo-v1/CMakeLists.txt"
 -DGINKGO_BUILD_CUDA=ON          # Build using CUDA for Nvidia devices
 ```
 
