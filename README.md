@@ -1,6 +1,6 @@
 # H-MECs
-This repository contains the code used for Hydro-Mechanical Earthquake Cycles (H-MECs) simulations. It relies on the Ginkgo library, which makes it possible to run the code on CPU and GPU with minimal changes, Nvidia, AMD and Intel are supported GPUs.
-The simulation is based on the follwing paper:
+This repository contains the code used for Hydro-Mechanical Earthquake Cycles (H-MECs) simulations. It relies on the Ginkgo library, which makes it possible to run the code on CPU and GPU with minimal changes, Nvidia, AMD and Intel are supported GPUs. The theoretical foundation of this simulation is given in:
+
 Computational Earthquake Physics ETH Zurich, 2022 Dal Zilio, L., Hegyi, B., Behr, W. M., Gerya, T. (2022) Hydro-mechanical earthquake cycles in a poro-visco-elasto-plastic fluid-bearing fault structure DOI: https://doi.org/10.1016/j.tecto.2022.229516
 
 ## Structure
