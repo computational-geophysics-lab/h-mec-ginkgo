@@ -65,10 +65,12 @@ To run the code on a GPU make sure to have the following option turned on, for A
 
 The final change to switch from the default CPU option to GPU is to uncomment these lines and comment the CPU executor configuration
 ```cpp
-// ReferenceExecutor for debugging. Comment
+// ReferenceExecutor for debugging.
+    # Comment these lines:
 //inline const auto exec = gko::ReferenceExecutor::create();
 //inline const auto gpu_exec = exec;
 
+    # And uncomment these lines
 // OmpExecutor for CPUs
 inline const auto exec = gko::OmpExecutor::create();
 
