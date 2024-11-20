@@ -18,6 +18,7 @@ H-MECs
 The code depends on two libraries, Ginkgo for linear algebra and HDF5 as efficient file system. Before building the code repository make sure to have the dependencies installed:
 ### Installing Ginkgo
 The code is built on the numerical algebra library Ginkgo. To install the Ginkgo library, refer to the install instructions from [Ginkgo](https://github.com/ginkgo-project/ginkgo/wiki/Tutorial-1:-Getting-Started).
+
 ### Installing HDF5
 Instructions to install HDF5 can be found on the [HDF5](https://www.hdfgroup.org/download-hdf5/) website.
 
@@ -56,6 +57,13 @@ dt = 5.87652e+06s
 ...
 ```
 
+### Visualization of the results
+Plotting the slip velocity shows the propagation of the event through the fault from right to left:
+![Vslip](./plots/EVO_Vslip.png)
+The next plot shows the fluid pressure along the fault:
+![Fluid pressure](./plots/EVO_press_flu.png)
+A quick overview of the event can be made by looking at the maximal slip velocity, on the left on a time axis with logarithmic slip velocity, on the right plotted against numerical timestep on a linear scale:
+![EVO_data](./plots/EVO_data.png)
 ## Running the experiment on GPU
 To run the code on a GPU make sure to have the following option turned on, for AMD/Intel GPUs turn the corresponding options to ON:
 ```markdown
@@ -66,7 +74,6 @@ To run the code on a GPU make sure to have the following option turned on, for A
 The final change to switch from the default CPU option to GPU is to uncomment these lines and comment the CPU executor configuration
 ```cpp
 // ReferenceExecutor for debugging.
-    # Comment these lines:
 //inline const auto exec = gko::ReferenceExecutor::create();
 //inline const auto gpu_exec = exec;
 
@@ -87,4 +94,3 @@ Now we are ready to run the program accelerated on a GPU!
 ## Next steps
 
  - So far the solver implemented is a direct LU solver. The goal is to use iterative solvers to increase speed.
- - 
