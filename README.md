@@ -11,7 +11,10 @@ H-MECs
 ├── CMakeLists.txt
 ├── README.md
 └── experiments             # Future numerical experiments can be added here
-    └── h-mec-rsf-ginkgo-v1
+    ├── h-mec-rsf-eigen-v2  # Original C++ code
+    ├── h-mec-rsf-eigen-v8
+    ├── h-mec-rsf-eigen-v10 # Starting point for the first ginkgo version
+    └── h-mec-rsf-ginkgo-v1 # Ginkgo version of eigen-v10
 ```
 
 ## Getting Started
@@ -73,11 +76,12 @@ To run the code on a GPU make sure to have the following option turned on, for A
 
 The final change to switch from the default CPU option to GPU is to uncomment these lines and comment the CPU executor configuration
 ```cpp
+    # Comment the CPU executor
 // ReferenceExecutor for debugging.
 //inline const auto exec = gko::ReferenceExecutor::create();
 //inline const auto gpu_exec = exec;
 
-    # And uncomment these lines
+    # And uncomment the CUDA/HIP/SYCL executor
 // OmpExecutor for CPUs
 inline const auto exec = gko::OmpExecutor::create();
 
@@ -93,4 +97,4 @@ Now we are ready to run the program accelerated on a GPU!
 
 ## Next steps
 
- - So far the solver implemented is a direct LU solver. The goal is to use iterative solvers to increase speed.
+ - So far the solver implemented is a direct LU solver. The goal is to use iterative solvers to increase speed. Examples of how such a solver could look like are already contained in the code as comments, however the best configuration of the solver has still to be found.

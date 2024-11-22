@@ -5,7 +5,9 @@ project(experiments)
 # List of example folder (add more if needed)
 set(EXPERIMENTS_LIST
     h-mec-rsf-ginkgo-v1
-    test_program
+    h-mec-rsf-eigen-v2
+    # h-mec-rsf-eigen-v8
+    # h-mec-rsf-eigen-v10
 )
 
 # Build for all examples

@@ -1,0 +1,56 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "Project",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "h_mec_rsf_v11::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-h_mec_rsf_v11-Debug-21275d8df77facb64e57.json",
+					"name" : "h_mec_rsf_v11",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/Users/niklaus/H-MEC-Ginkgo-dev/experiments/h-mec-rsf-eigen-v11/cmake-build-debug",
+		"source" : "/Users/niklaus/H-MEC-Ginkgo-dev/experiments/h-mec-rsf-eigen-v11"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 6
+	}
+}
