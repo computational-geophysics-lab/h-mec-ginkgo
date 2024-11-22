@@ -6,16 +6,14 @@ project(experiments)
 set(EXPERIMENTS_LIST
     h-mec-rsf-ginkgo-v1
     h-mec-rsf-eigen-v2
-    # h-mec-rsf-eigen-v8
-    # h-mec-rsf-eigen-v10
+    # h-mec-rsf-eigen-v8	# pardiso solver requires intelMKL
+    # h-mec-rsf-eigen-v10	# pardiso solver requires intelMKL
 )
 
 # Build for all examples
 foreach(experiment ${EXPERIMENTS_LIST})
     add_subdirectory(${experiment})
     file(MAKE_DIRECTORY "${CMAKE_BINARY_DIR}/experiments/${experiment}")
-    file(MAKE_DIRECTORY "${CMAKE_BINARY_DIR}/experiments/${experiment}/input_data")
 	file(MAKE_DIRECTORY "${CMAKE_BINARY_DIR}/experiments/${experiment}/output_data")
 	#Write a file called StartingTimestep.txt in which to specify if the simulation starts new or continues from a previous simulation
-	file(WRITE "${CMAKE_BINARY_DIR}/experiments/${experiment}/input_data/StartingTimestep.txt" "0")
 endforeach()

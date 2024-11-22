@@ -375,7 +375,7 @@ double* minvzsmod = minvzsmod_gko->get_values();// num_timesteps x 1 Vector
 // variables for timer 
 std::chrono::time_point<std::chrono::system_clock> time_start, time_end; // total runtime
 
-int main() {
+int main(int argc, char* argv[]) {
     t_marker_gko->fill(1.0);
     rhom_gko->fill(2800.0);
     etasm_gko->fill(1e21);
@@ -393,14 +393,14 @@ int main() {
     time_start = std::chrono::system_clock::now();
     std::srand(time(nullptr));
 
+    int timestep = 0;
+    if (argc==2){
+      timestep = stoi(argv[1]);
+    }else if(argc>2){
+      throw("Too many arguments! Do ./h_mec_rsf_ginkgo_v1 if you want to start a new simulation or ./h_mec_rsf_ginkgo_v1 starting_timestep if you want to read in previous simulation data from a H5 file.");
+    }
 
-    // read input
-    // Load file
-    std::string timestep_str;
-    std::ifstream input_timestep("./input_data/StartingTimestep.txt");
-    std::getline(input_timestep, timestep_str);
-    int timestep = stoi(timestep_str);
-    input_timestep.close();
+
     init_geometry();
     std::cout << "The A " << Nx << " x " << Ny << " grid is simulated, starting at timestep = " << timestep << "!" << std::endl;
 
