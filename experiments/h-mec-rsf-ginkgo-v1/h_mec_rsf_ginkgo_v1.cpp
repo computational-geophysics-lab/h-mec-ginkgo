@@ -41,13 +41,11 @@ Fluid Continuity: dVxD / dx + dVyD / dy - (Pt - Pf) / ETAbulk = 0
 #include "include/hdf5.hpp"
 #include "include/write_output.h"
 
-
-/* ====================== Ginkgo =============================
-Changes:
- - Replaced all Eigen vectors/matrices with gko matrices*/
-
 using namespace H5;
 
+/*
+main() begins at line 350, before that is memory allocation
+*/
 // Basic nodes
 std::unique_ptr<gko::matrix::Dense<>> OM0_gko = gko::matrix::Dense<double>::create(exec, gko::dim<2>(Ny,Nx)); // Old state parameter
 double* OM0 = OM0_gko->get_values(); // Ny x Nx, Old state parameter
@@ -61,16 +59,6 @@ std::unique_ptr<gko::matrix::Dense<>> BRSF_gko = gko::matrix::Dense<double>::cre
 double* BRSF = BRSF_gko->get_values(); // Ny x Nx, b - parameter of RSF
 std::unique_ptr<gko::matrix::Dense<>> LRSF_gko = gko::matrix::Dense<double>::create(exec, gko::dim<2>(Ny,Nx)); // Ny x Nx, L - parameter of RSF
 double* LRSF = LRSF_gko->get_values(); // Ny x Nx, L - parameter of RSF
-
-/*
-// Basic nodes
-Eigen::MatrixXd OM0(Ny, Nx);  // Old state parameter
-Eigen::MatrixXd OM(Ny, Nx);   // State parameter
-Eigen::MatrixXd OM5(Ny, Nx);
-Eigen::MatrixXd ARSF(Ny, Nx); // a - parameter of RSF
-Eigen::MatrixXd BRSF(Ny, Nx); // b - parameter of RSF
-Eigen::MatrixXd LRSF(Ny, Nx); // L - parameter of RSF
-*/
 
 std::unique_ptr<gko::matrix::Dense<>> pt_gko = gko::matrix::Dense<double>::create(exec, gko::dim<2>(Ny1, Nx1)); // Ny1 x Nx1, Total pressure
 double* pt = pt_gko->get_values(); // Ny1 x Nx1, Total pressure
@@ -86,17 +74,6 @@ std::unique_ptr<gko::matrix::Dense<>> vxD_gko = gko::matrix::Dense<double>::crea
 double* vxD = vxD_gko->get_values(); // Ny1 x Nx1, Darsi vx - velocity
 std::unique_ptr<gko::matrix::Dense<>> vyD_gko = gko::matrix::Dense<double>::create(exec, gko::dim<2>(Ny1, Nx1)); // Ny1 x Nx1, Darsi vy - velocity
 double* vyD = vyD_gko->get_values(); // Ny1 x Nx1, Darsi vy - velocity
-
-/*
-// Unknown parameters
-Eigen::MatrixXd pt(Ny1, Nx1);  // Total pressure
-Eigen::MatrixXd vxs(Ny1, Nx1); // Solid vx - velocity
-Eigen::MatrixXd vys(Ny1, Nx1); // Solid vy - velocity
-Eigen::MatrixXd vzs(Ny1, Nx1); // Solid vz - velocity
-Eigen::MatrixXd pf(Ny1, Nx1);  // Fluid pressure
-Eigen::MatrixXd vxD(Ny1, Nx1); // Darsi vx - velocity
-Eigen::MatrixXd vyD(Ny1, Nx1); // Darsi vy - velocity
-*/
 
 std::unique_ptr<gko::matrix::Dense<>> RHO_gko = gko::matrix::Dense<double>::create(exec, gko::dim<2>(Ny, Nx)); // Ny x Nx // Ny x Nx
 double* RHO = RHO_gko->get_values(); // Ny x Nx
@@ -189,11 +166,6 @@ double* SYY0 = SYY0_gko->get_values(); // Ny1 x Nx1
 std::unique_ptr<gko::matrix::Dense<>> DILP_gko = gko::matrix::Dense<double>::create(exec, gko::dim<2>(Ny1, Nx1)); // Ny1 x Nx1
 double* DILP = DILP_gko->get_values(); // Ny1 x Nx1
 
-/*
-// Pressure nodes
-Eigen::MatrixXd ETAB(Ny1, Nx1), ETAB0(Ny1, Nx1), ETAP(Ny1, Nx1), ETAP0(Ny1, Nx1), POR(Ny1, Nx1), GGGP(Ny1, Nx1), GGGB(Ny1, Nx1), PTF0(Ny1, Nx1), PT0(Ny1, Nx1), PF0(Ny1, Nx1), pt_ave(Ny1, Nx1),
-      pf_ave(Ny1, Nx1), SXX(Ny1, Nx1), SXX0(Ny1, Nx1), SYY(Ny1, Nx1), SYY0(Ny1, Nx1), DILP(Ny1, Nx1);
-*/
 
 std::unique_ptr<gko::matrix::Dense<>> RHOX_gko = gko::matrix::Dense<double>::create(exec, gko::dim<2>(Ny1, Nx1)); // Ny1 x Nx1
 double* RHOX = RHOX_gko->get_values(); // Ny1 x Nx1
@@ -231,9 +203,6 @@ Eigen::MatrixXd RHOY(Ny1, Nx1), RHOFY(Ny1, Nx1), ETADY(Ny1, Nx1), PORY(Ny1, Nx1)
 
 std::unique_ptr<gko::matrix::Dense<>> VZ0_gko = gko::matrix::Dense<double>::create(exec, gko::dim<2>(Ny1, Nx1)); // Ny1 x Nx1
 double* VZ0 = VZ0_gko->get_values(); // Ny1 x Nx1
-
-// Vz nodes
-//Eigen::MatrixXd VZ0(Ny1, Nx1);
 
 
 std::unique_ptr<gko::matrix::Dense<>> ESP_gko = gko::matrix::Dense<double>::create(exec, gko::dim<2>(Ny, Nx)); // Ny x Nx
@@ -402,8 +371,10 @@ int main(int argc, char* argv[]) {
 
 
     init_geometry();
+    
     std::cout << "The A " << Nx << " x " << Ny << " grid is simulated, starting at timestep = " << timestep << "!" << std::endl;
 
+    // If the simulation continues from previous data, read in the data
     read_in_matrices(timestep);
     // ///////////////////////////////////////////////////////////////////////////////////////
     // actual computations start here

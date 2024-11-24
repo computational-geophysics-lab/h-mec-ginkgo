@@ -3,10 +3,7 @@
 using namespace std;
 using namespace H5;
 
-/* ======================== Ginkgo =====================
-Todo:
-Convert everything to Ginkgo. Example Sxx.block(i,j,2,2).sum(); needs to be implemented with ginkgo
-*/
+
 void power_law(int &timestep, int &ynpl, double &ddd){
         if (timestep > tyield) {
             for (int i = 0; i < Ny; i++) {

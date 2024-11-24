@@ -6,14 +6,7 @@ using namespace H5;
 
 void run_simulation(int &timestep){
 
-    /* Enable timers to estimate the runspeed of the parts of the code
-     * The most costly parts are the assembly of the L_matrix and the building of the direct solver
-     * The building involves a LU decomposition which is expensive, in turn the actual solving is fast.
-     * For iterative solvers the solving is the expensive part.
-     */
-
-
-
+    // Set up timers to analyze execution speed
     using std::chrono::milliseconds;
     auto t1 = std::chrono::high_resolution_clock::now();
     auto t2 = std::chrono::high_resolution_clock::now();
@@ -130,7 +123,7 @@ void run_simulation(int &timestep){
     gko::matrix_data<> empty_csr_matrix{gko::dim<2>(1,1)}; // Contains nothing, used to reset the L matrix after each timestep
     gko::matrix_assembly_data<double, int> L_assembly{gko::dim<2>(N,N)};
 
-    // To subtract gko matrices I only found the sub_scaled function, that also takes a factor alpha, where alpha has to be a gko::matrix, I just set it to 1.0 I assume there is a better solution, but I didn't find it
+    // To subtract gko matrices I only found the sub_scaled function, that also takes a factor alpha, where alpha has to be a gko::matrix, I just set it to 1.0
     std::unique_ptr<gko::matrix::Dense<>> sub_alpha = gko::matrix::Dense<double>::create(exec, gko::dim<2>(1,1)); // Need a alpha parameter when subtracting matrices -> set to 1.0
     sub_alpha->at(0,0)=1.0; // Need a alpha parameter when subtracting matrices -> set to 1.0
 
@@ -152,6 +145,7 @@ void run_simulation(int &timestep){
     for (; timestep <= num_timesteps; timestep++) {
 
 
+        // Reset matrices
         RHOSUM_gko->fill(0);
         ETASUM_gko->fill(0);
         KKKSUM_gko->fill(0);
@@ -191,8 +185,7 @@ void run_simulation(int &timestep){
         WTYSUM_gko->fill(0);
         t2 = std::chrono::high_resolution_clock::now();
 
-        // Cycle on markers
-        //#pragma omp parallel for // about 3-4x faster with n = 4
+        // Compute variables on markers
         for (int m = 0; m < marknum; m++) {
             double cohescmm = 0.0, cohestmm = 0.0, frictcmm = 0.0, dilatcmm = 0.0, fricttmm = 0.0, etasmm0 = 0.0, etamm0 = 0.0, etamm = 0.0, rhomm = 0.0, etadm = 0.0;
 

@@ -11,6 +11,6 @@
 
 using namespace std;
 
-void move_markers();
+//void move_markers();
 
 #endif

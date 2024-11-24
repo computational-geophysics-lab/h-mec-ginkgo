@@ -11,11 +11,7 @@ foreach(source_file ${PROGRAM_SOURCE})
 endforeach()
 
 target_include_directories(${PROGRAM_NAME} PRIVATE ${HDF5_INCLUDE_DIRS})
-# Add compiler options
-#target_compile_definitions(${PROGRAM_NAME}
-#	PUBLIC _LARGEFILE_SOURCE
-#	PUBLIC _LARGEFILE64_SOURCE
-#	PUBLIC _BSD_SOURCE)
+
 #Choose accelerator:
 target_compile_options(${PROGRAM_NAME}
         PUBLIC	-DGINKGO_BUILD_REFERENCE=ON

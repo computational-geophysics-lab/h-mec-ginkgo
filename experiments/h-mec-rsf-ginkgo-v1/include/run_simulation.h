@@ -11,8 +11,6 @@
 #include <iomanip>
 #include <chrono>
 #include "write_output.h"
-#include "LR_setup.h"
-#include "move_markers.h"
 #include "process_p_cells.h"
 #include "power_law.h"
 #include "ginkgo_exec.hpp"

@@ -4,13 +4,9 @@
 using namespace std;
 using namespace H5;
 
-/* ======================== Ginkgo =====================
-Todo:
-Convert everything to Ginkgo. Example Sxx.block(i,j,2,2).sum(); needs to be implemented with ginkgo
-*/
+
 
 void process_p_cells(){
-    // #pragma omp parallel for collapse(2) // about 2x faster with n = 4 but breaks the simulation
     for (int i = 1; i < Ny1-1; i++) {
         for (int j = 1; j < Nx1-1; j++) {
             if (antiplane) {
