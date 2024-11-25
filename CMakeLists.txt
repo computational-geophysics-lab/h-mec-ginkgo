@@ -7,46 +7,36 @@ project(H-MECs-Ginkgo)
 #Set C++17 Standard
 set(CMAKE_CXX_STANDARD 17)
 
+# Options
+option(BUILD_GINKGO "Build ginkgo version of the code" ON)
+option(BUILD_EIGEN "Build eigen versions of the code, excluding ones that need MKL" ON)
+option(BUILD_MKL "Build eigen version v10, depends on Intel oneMKL" OFF)
+
+
 # Include the custom SetupTests.cmake file
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 include(SetupDependency)
 
-# Configuration options for setting up tests for each subdirectory
-option(BUILD_BENCHMARKS "Enable Google Benchmarking" OFF)
-option(BUILD_TESTS "Generate build files for unit tests" OFF)
-option(VISU_OPENCV "Visualization using OpenCV" ON)
-
-# Configure Google Test v1.12.0
-if(BUILD_TESTS)
-    enable_testing()
-    # Find and include Google Test
-    find_or_fetch_library("GTest" "f8d7d77c06936315286eb55f8de22cd23c188571" "1.12.0" "https://github.com/google/googletest.git")
-
-    # Find and include Google Test
-    include(GoogleTest)  
-    include(SetupTests)
+if(BUILD_EIGEN)
+    # Find Eigen (required for eigen versions of the code)
+    find_package(Eigen NO_MODULE)
 endif()
 
-#Find Ginkgo
-#list(APPEND CMAKE_MODULE_PATH "/home/niklmeier/ginkgo/build")
-#list(APPEND CMAKE_PREFIX_PATH "/home/niklmeier/ginkgo/build")
-find_package(Ginkgo)
-if(Ginkgo_FOUND)
-    message(STATUS "Ginkgo version: ${Ginkgo_VERSION}")
+if(BUILD_MKL)
+    # Find Intel Math Kernel Library (required for h-mec-rsf-eigen-v10)
+    find_package(MKL)
 endif()
 
-# Configure Benchmark v1.8.3
-if(BUILD_BENCHMARKS)
-    find_or_fetch_library("Benchmark" "344117638c8ff7e239044fd0fa7085839fc03021" "1.8.3" "https://github.com/google/benchmark.git")
-endif()
 
-# Configure Visualization with OpenCV v4.6.0
-
-if(VISU_OPENCV)
-    list(APPEND CMAKE_MODULE_PATH "/cluster/home/   niklmeier/opencv/build")
-    list(APPEND CMAKE_PREFIX_PATH "/cluster/home/niklmeier/opencv/build")
-    find_package(OpenCV)
-    #find_or_fetch_library("OpenCV" "b0dc474160e389b9c9045da5db49d03ae17c6a6b" "4.6.0" "https://github.com/opencv/opencv.git")
+if(BUILD_GINKGO)
+    #Find Ginkgo
+    # Uncomment if using a local version of ginkgo
+    #list(APPEND CMAKE_MODULE_PATH "/path/to/your/ginkgo/build")
+    #list(APPEND CMAKE_PREFIX_PATH "/path/to/your/ginkgo/build")
+    find_package(Ginkgo REQUIRED)
+    if(Ginkgo_FOUND)
+        message(STATUS "Ginkgo version: ${Ginkgo_VERSION}")
+    endif()
 endif()
 
 
