@@ -18,7 +18,7 @@ H-MECs
 ```
 
 ## Getting Started
-The code depends on two libraries, Ginkgo for linear algebra and HDF5 as efficient file system. Before building the code repository make sure to have the dependencies installed:
+The ginkgo experiment depends on two libraries, Ginkgo for linear algebra and HDF5 as efficient file system. The Eigen versions additionally depend on Eigen as well as Intel MKL for the pardiso solver. Before building the code repository make sure to have the dependencies installed:
 ### Installing Ginkgo
 The code is built on the numerical algebra library Ginkgo. To install the Ginkgo library, refer to the install instructions from [Ginkgo](https://github.com/ginkgo-project/ginkgo/wiki/Tutorial-1:-Getting-Started).
 
@@ -98,3 +98,4 @@ Now we are ready to run the program accelerated on a GPU!
 ## Next steps
 
  - So far the solver implemented is a direct LU solver. The goal is to use iterative solvers to increase speed. Examples of how such a solver could look like are already contained in the code as comments, however the best configuration of the solver has still to be found.
+ - Benchmark the speed
