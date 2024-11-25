@@ -17,6 +17,25 @@ h-mecs-rsf-ginkgo-v1
     ├── read_in_matrices        # Read in previous simulation data to continue simulation
     └── write_output
 ```
+## Switching from CPU to GPU
+To build the code utilizing a GPU device, make sure you have made these two changes:
+```cpp
+// In the CMakeLists.txt file, switch the compile option for the respective GPU to ON:
+target_compile_options(${PROGRAM_NAME}
+PUBLIC  -DGINKGO_BUILD_CUDA=ON 
+)
+```
+and in the file include/ginkgo_exec.cpp
+```cpp
+// Comment the Reference Executor for debugging and enable:
+
+// OmpExecutor for CPUs
+inline const auto exec = gko::OmpExecutor::create();
+
+// CudaExecutor for Nvidia GPUs
+inline const auto gpu_exec = gko::CudaExecutor::create(0, gko::OmpExecutor::create()); // If using AMD instead enable the HipExecutor
+```
+
 ## The simulation timestep loop
 Most of the actual computation is done inside the run_simulation_gko.cpp file. Inside the timestep loop we repeat the following steps:
  - Updating variables on the markers
