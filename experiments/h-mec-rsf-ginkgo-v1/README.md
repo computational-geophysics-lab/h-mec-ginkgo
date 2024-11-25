@@ -35,7 +35,10 @@ inline const auto exec = gko::OmpExecutor::create();
 // CudaExecutor for Nvidia GPUs
 inline const auto gpu_exec = gko::CudaExecutor::create(0, gko::OmpExecutor::create()); // If using AMD instead enable the HipExecutor
 ```
-
+Afterwards you will have to build again inside the build directory before running the executable:
+```bash
+cmake --build .
+```
 ## The simulation timestep loop
 Most of the actual computation is done inside the run_simulation_gko.cpp file. Inside the timestep loop we repeat the following steps:
  - Updating variables on the markers
