@@ -2,9 +2,6 @@
 #include "constants.hpp"
 
 
-
-
-
 const std::unique_ptr<gko::matrix::Dense<>> x_gko = GinkgoLinSpaced(Nx, xbeg, xend); // (Nx x 1) Vector, horizontal coordinates of basic grid points
 const double* x = x_gko->get_values(); // (Nx x 1) Vector, horizontal coordinates of basic grid points
 const std::unique_ptr<gko::matrix::Dense<>> y_gko = GinkgoLinSpaced(Ny, ybeg, yend); // (Ny x 1) Vector, vertical coordinates of basic grid points

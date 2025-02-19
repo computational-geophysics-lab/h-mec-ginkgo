@@ -7,14 +7,6 @@
 #include "ginkgo_exec.hpp"
 
 using namespace std;
-/* --------------Ginkgo-------------------Ginkgo----------------------
-Changes:
- - The linspace grids have been replaced.
- - Added function GinkgoLinSpace to create ginkgo linspace grids
-Todo:
-replace arsfm, brsfm, lrsfm and omm, are just 2x1 vectors -> not sure if ginkgo makes sense
-replace gm, rhofm, etafm -> not yet sure what they are used for, but it seems like they are just 320'000 entry vectors filled with a single constant
-*/
 
 
 // set timestep limit

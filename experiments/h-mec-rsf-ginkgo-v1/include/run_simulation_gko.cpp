@@ -1033,7 +1033,6 @@ void run_simulation(int &timestep){
             t6 = std::chrono::high_resolution_clock::now();
             t7 = std::chrono::high_resolution_clock::now();
 
-            //std::cout << "\nCheck what the initial guess is, whether it's R or S. Has to be S in my case.\nApply uses initial_guess is " << solver->apply_uses_initial_guess() << "!" << "\nCurrent timestep = " << timestep  << std::endl;
             std::cout << "Iteration #" << iterstep+1 << "!\ndt = " << dt << "s\n";
             S_gpu->copy_from(R_gpu.get());
             solver->apply(R_gpu, S_gpu);
@@ -1111,7 +1110,6 @@ void run_simulation(int &timestep){
 
             // This can be implemented as for loop, change it later on:
             // External P - nodes: symmetry
-            //std::cout << "Check again that the copy_bounds function does what I intend. Also check square_block";
             copy_bounds(pt_gko, Nx1, Ny1);
             copy_bounds(pf_gko, Nx1, Ny1);
             copy_bounds(EXX_gko, Nx1, Ny1);
@@ -1454,7 +1452,6 @@ void run_simulation(int &timestep){
             }
 
 
-            //std::cout << "\n\nTimestep data: dt = " << dt << " and yn = " << yn << " dtx = " << dtx << " and dty = "<<dty << "dtpl " << dtpl << " dtslip = " <<  dtslip << " dtlapusta = " << dtlapusta << std::endl;
             // Chose minimal timestep
             if (yn && dt > dtmin) {
                 const double dtold = dt;
@@ -1559,7 +1556,6 @@ void run_simulation(int &timestep){
                 save_matrix("./output_data/EYY_ppcells.txt", EYY, Nx1, Ny1);
                 save_matrix("./output_data/SYY0_ppcells.txt", SYY0, Nx1, Ny1);
                 save_matrix("./output_data/GGGP_ppcells.txt", GGGP, Nx1, Ny1);
-                std::cout << "\nSaved process_p_cells relevant matrices.";
             }*/
 
             // Process pressure cells
@@ -1687,7 +1683,6 @@ void run_simulation(int &timestep){
             std::cout << "Updating the global variables " << ms_89.count() << "ms\n";
             std::cout << "Computing the error: " << ms_910.count() << "ms\n";
         }
-        //std::cout << "Load the S vector from pardiso into ginkgo v1 and compare L after the plasticity routine";
         write_output(timestep);
 
     }

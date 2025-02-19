@@ -1,9 +1,6 @@
 #include "read_in_matrices.h"
 #include <ginkgo/ginkgo.hpp>
 
-/*
-remove " && false" from the if condition in line 9. This causes a segfault on gcc compiled machines
- */
 
 void read_in_matrices(int &timestep){
     if (timestep > 0) {

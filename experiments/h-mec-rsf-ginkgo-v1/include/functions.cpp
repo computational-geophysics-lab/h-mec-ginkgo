@@ -8,12 +8,7 @@
 #include <vector>
 
 using namespace std;
-/* --------------Ginkgo-------------------Ginkgo----------------------
-Changes:
- - Added function GinkgoLinSpaced to create a ginkgo vector with linear spacing, analog to Eigen::LinSpaced -> moved to constants.hpp, as I had troubles overloading the function because constants.hpp depended on functions.hpp, and functions.hpp depended on constants.hpp
- - the function copy_bounds takes Eigen::MatrixXd& Temp as argument -> change to ginkgo
-Todo:
-*/
+
 
 // function that checks if a integer value is bigger than 0 and lower than a set bound
 int check_bounds(int k, const int bound) {
@@ -150,15 +145,7 @@ double findmin(double* matrix, int Nx, int Ny) {
     return min;
 }
 
-void print_matrix(double* matrix, int Nx, int Ny) {
-    std::cout << std::endl;
-    for (int i=0; i<Ny; i++) {
-        for (int j=0; j<Nx; j++) {
-            std::cout << matrix[i*Nx + j] << " ";
-        }
-        std::cout << "\n";
-    }
-}
+
 void save_matrix(const std::string filename, double* matrix, int Nx, int Ny) {
     std::ofstream mat_output;
     mat_output.open(filename, std::ios_base::app |std::ios_base::out);
@@ -201,33 +188,4 @@ std::vector<int> read_ind_vector(const std::string &filepath) {
     }
 
     return indices;
-}
-
-std::vector<double> read_L_supposed(const std::string &filepath) {
-        // make size at least as large as needed
-        const int size = 130000;
-        //int array[size];
-        std::vector<double> array;
-
-        ifstream file(filepath);
-
-        int count = 0;
-        double x;
-
-        // check that array is not already full
-        // and read integer from file,
-
-        while (count < size && file >> x) {
-            //array[count++] = x;
-            array.push_back(x);
-            count++;
-        }
-
-
-        // display the values stored in the array
-        /*for (int i = 0; i < count; i++) {
-            cout << array[i] <<' ';
-        }*/
-        std::cout << "\nThe count is = " << count;
-        return array;
 }

@@ -1,7 +1,8 @@
 # H-MECs
 This repository contains the code used for Hydro-Mechanical Earthquake Cycles (H-MECs) simulations. It relies on the Ginkgo library, which makes it possible to run the code on CPU and GPU with minimal changes, Nvidia, AMD and Intel are supported GPUs. The theoretical foundation of this simulation is given in:
 
-Computational Earthquake Physics ETH Zurich, 2022 Dal Zilio, L., Hegyi, B., Behr, W. M., Gerya, T. (2022) Hydro-mechanical earthquake cycles in a poro-visco-elasto-plastic fluid-bearing fault structure DOI: https://doi.org/10.1016/j.tecto.2022.229516
+Computational Earthquake Physics ETH Zurich, 2022 Dal Zilio, L., Hegyi, B., Behr, W. M., Gerya, T. (2022) Hydro-mechanical earthquake cycles in a poro-visco-elasto-plastic fluid-bearing fault structure<br/>
+DOI: https://doi.org/10.1016/j.tecto.2022.229516
 
 ## Structure
 The repository is structured as follows:
@@ -18,7 +19,7 @@ H-MECs
 ```
 
 ## Getting Started
-The ginkgo experiment depends on two libraries, Ginkgo for linear algebra and HDF5 as efficient file system. The Eigen versions additionally depend on Eigen as well as Intel MKL for the pardiso solver. Before building the code repository make sure to have the dependencies installed:
+The ginkgo experiment depends on two libraries, Ginkgo for linear algebra and HDF5 as efficient file system. The Eigen versions additionally depend on Eigen as well as IntelMKL for the pardiso solver. Before building the code repository make sure to have the dependencies installed:
 ### Installing Ginkgo
 The code is built on the numerical algebra library Ginkgo. To install the Ginkgo library, refer to the install instructions from [Ginkgo](https://github.com/ginkgo-project/ginkgo/wiki/Tutorial-1:-Getting-Started).
 
@@ -28,7 +29,7 @@ Instructions to install HDF5 can be found on the [HDF5](https://www.hdfgroup.org
 ### Install H-MECs
 Once you have the Ginkgo library installed you can proceed. In a terminal go to your preferred target directory and enter the following command to clone the git repository:
 ```bash
-git clone git@github.com:NikMeier/H-MECs.git
+git@github.com:computational-geophysics-lab/h-mec-ginkgo.git
 ```
 The simulation is then built with standard cmake procedure:
 
@@ -39,7 +40,7 @@ cd build
 cmake .. && cmake --build .
 ```
 
-In the build directory you will find the experiment folder, containing all the experiments, for now only 'h-mecs-rsf-ginkgo-v1'.
+In the build directory you will find the experiment folder, containing all the experiments, the current Ginkgo version 'h-mecs-rsf-ginkgo-v1' and Eigen versions v2, v8 and v10.
 
 ## Running a experiment
 To run the code go to the directory and run the executable:
@@ -78,8 +79,8 @@ The final change to switch from the default CPU option to GPU is to uncomment th
 ```cpp
     # Comment the CPU executor
 // ReferenceExecutor for debugging.
-//inline const auto exec = gko::ReferenceExecutor::create();
-//inline const auto gpu_exec = exec;
+// inline const auto exec = gko::ReferenceExecutor::create();
+// inline const auto gpu_exec = exec;
 
     # And uncomment the CUDA/HIP/SYCL executor
 // OmpExecutor for CPUs

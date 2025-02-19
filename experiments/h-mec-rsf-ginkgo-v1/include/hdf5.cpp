@@ -7,12 +7,6 @@ using namespace std;
 using namespace H5;
 
 
-/* ======================== Ginkgo ============================
-Changes:
- - Adapted read_matrix to ginkgo -> Check stride, adapt indices to gko indices
-Todo:
-- Test if I have the indices i,j mixed up for row/column in read_matrix
-*/
 
 /*
 inputs:

@@ -3,12 +3,9 @@
 using namespace std;
 using namespace H5;
 
-/*==========================Ginkgo==========================
-Remove the && false from the if condition on line 208 to enable saving as H5 file. Temporarily disabled to make it run on gcc compiled machines.
- */
 
 
-// prints row of gko matrix 
+// prints row of gko matrix
 void write_row(std::string savefile_name, std::unique_ptr<gko::matrix::Dense<gko::default_precision>>& matrix, std::size_t row_index) {
     if (row_index >= matrix->get_size()[0]) {
         throw std::out_of_range("Row index is out of bounds");

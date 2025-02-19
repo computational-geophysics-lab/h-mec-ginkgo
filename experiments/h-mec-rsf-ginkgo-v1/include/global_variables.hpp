@@ -9,12 +9,6 @@
 
 using namespace std;
 
-/* =====================Ginkgo====================
-Changes:
- - Changed all Eigen objects to ginkgo vectors
-Todo:
- - need extern for both the ginkgo vectors and their pointers
-*/
 // Basic nodes
 extern std::unique_ptr<gko::matrix::Dense<double>> OM0_gko; //Ny x Nx, Old State parameter
 extern double*  OM0; // Ny x Nx, Old State parameter

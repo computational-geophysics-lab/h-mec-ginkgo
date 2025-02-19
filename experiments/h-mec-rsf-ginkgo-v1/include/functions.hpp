@@ -15,10 +15,6 @@
 using namespace std;
 
 
-/* =========================== Ginkgo ======================== 
-Todo: Convert auto square_black to ginkgo
-*/
-
 
 // lambda function that rounds towards 0
 inline auto fix_towards_zero = [](const double temp) {
